@@ -84,16 +84,58 @@
     return answer(400, { error: WRITE });
   };
 
+  /* A pill at the bottom on a wide screen; on a phone a thin strip above the page, so it covers no buttons. */
   const pill = () => {
+    const style = document.createElement("style");
+    style.textContent = ".demo-pill{position:fixed;left:50%;bottom:10px;transform:translateX(-50%);z-index:9999;padding:6px 14px;" +
+      "border-radius:999px;background:rgba(24,33,30,.88);color:#F2C14C;font:600 12px/1.2 system-ui,sans-serif;" +
+      "text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.25);white-space:nowrap}" +
+      "@media (max-width:699px){.demo-pill{position:static;display:block;transform:none;border-radius:0;box-shadow:none;" +
+      "background:#18211E;white-space:normal;text-align:center;padding:7px 12px;font-size:11.5px}}";
+    style.textContent += ".fade-r{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 40px),transparent);" +
+      "mask-image:linear-gradient(to right,#000 calc(100% - 40px),transparent)}" +
+      ".fade-l{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 40px),transparent);" +
+      "mask-image:linear-gradient(to left,#000 calc(100% - 40px),transparent)}" +
+      ".fade-l.fade-r{-webkit-mask-image:linear-gradient(to right,transparent,#000 40px,#000 calc(100% - 40px),transparent);" +
+      "mask-image:linear-gradient(to right,transparent,#000 40px,#000 calc(100% - 40px),transparent)}";
+    document.head.appendChild(style);
     const a = document.createElement("a");
+    a.className = "demo-pill";
     a.href = REPO;
     a.target = "_blank";
     a.rel = "noopener";
     a.textContent = "Live demo · made-up data · nothing is saved · about Stellwerk ↗";
-    a.style.cssText = "position:fixed;left:50%;bottom:10px;transform:translateX(-50%);z-index:9999;padding:6px 14px;" +
-      "border-radius:999px;background:rgba(24,33,30,.88);color:#F2C14C;font:600 12px/1.2 system-ui,sans-serif;" +
-      "text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.25);white-space:nowrap;";
-    document.body.appendChild(a);
+    document.body.insertBefore(a, document.body.firstChild);
   };
   if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", pill); } else { pill(); }
+
+  /* On a narrow screen the release line and the calendar are wider than the phone and scroll sideways in their box:
+     each one turns to what matters (the selected train, today) when it appears or the selection changes, and its
+     edges fade where there is more to see. A box the visitor scrolled is left where they put it. */
+  const SCROLLERS = ".rail-wrap, .cal-wrap, .mn-map-wrap, .mtable-wrap, .ci-scroll";
+  const centred = new WeakMap();
+  const fades = (wrap) => {
+    const more = wrap.scrollWidth - wrap.clientWidth;
+    wrap.classList.toggle("fade-l", more > 2 && wrap.scrollLeft > 2);
+    wrap.classList.toggle("fade-r", more > 2 && wrap.scrollLeft < more - 2);
+  };
+  const tick = () => {
+    document.querySelectorAll(SCROLLERS).forEach((wrap) => {
+      if (!wrap.dataset.demoScroll) {
+        wrap.dataset.demoScroll = "1";
+        wrap.addEventListener("scroll", () => fades(wrap), { passive: true });
+      }
+      if (wrap.scrollWidth > wrap.clientWidth + 2) {
+        const target = wrap.matches(".rail-wrap") ? wrap.querySelector(".train.sel") : wrap.matches(".cal-wrap") ? wrap.querySelector(".today") : null;
+        const key = target ? target.textContent + "|" + wrap.scrollWidth : "";
+        if (target && centred.get(wrap) !== key) {
+          centred.set(wrap, key);
+          const w = wrap.getBoundingClientRect(), t = target.getBoundingClientRect();
+          wrap.scrollLeft += t.left + t.width / 2 - (w.left + w.width / 2);
+        }
+      }
+      fades(wrap);
+    });
+  };
+  setInterval(tick, 400);
 })();
