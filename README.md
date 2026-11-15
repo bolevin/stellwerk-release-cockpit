@@ -126,4 +126,4 @@ See it for yourself: press *Why?* on a red tile or *Prepare the gate* on the Coc
 
 ## Status
 
-A personal project, version 0.28. The demo world in the screenshots and everything in it is invented. Questions and feedback are welcome: [LinkedIn](https://www.linkedin.com/in/boris-levin-ai).
+A personal project, version 0.28. The demo world in the screenshots and everything in it is invented.
