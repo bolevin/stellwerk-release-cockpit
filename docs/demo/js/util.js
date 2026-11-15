@@ -39,7 +39,7 @@ export function talkVoice(voices, lang) {
   return mine.find((v) => v.default) || mine[0] || null;
 }
 export const LEVEL_ICON = { critical: "!", warning: "▲", info: "i" };
-export const SYS_TABS = ["overview"];
+export const SYS_TABS = ["overview", "settings", "agents", "files", "history"];
 export const DARK = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
 
 export function stored(key) { try { return localStorage.getItem("stellwerk." + key) || ""; } catch (e) { return ""; } }

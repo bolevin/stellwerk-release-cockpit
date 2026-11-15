@@ -375,7 +375,7 @@ Vue.createApp(useRender("root", {
       return (this.sys ? this.sys.agents : []).slice().sort((a, b) => rank(a) - rank(b));
     },
     edDirty() { return !!this.ed && this.ed.editable && this.edText !== this.ed.text; },
-    editorOn() { return this.llm.kind === "opencode" && !!this.cfg["agent.editor"]; },
+    editorOn() { return this.llm.kind === "agentserver" && !!this.cfg["agent.editor"]; },
     edReplyHtml() { return markdown(this.edReply); },
 
     srGroups() {
@@ -562,7 +562,7 @@ Vue.createApp(useRender("root", {
     },
 
     arch() {
-      const sys = this.sys, proj = (sys && sys.project) || {}, on = this.llm.kind === "opencode", t = this.t;
+      const sys = this.sys, proj = (sys && sys.project) || {}, on = this.llm.kind === "agentserver", t = this.t;
       const files = sys ? sys.agents : [], rag = (proj.mcp || []).find((m) => m.name === "atlas-rag"), localRag = (proj.mcp || []).find((m) => m.name === "release-rag");
       const llm = on ? { ok: "g", bad: "r" }[this.llm.status] || "y" : "off";
       let host = "127.0.0.1:4096";
@@ -1300,11 +1300,11 @@ Vue.createApp(useRender("root", {
     fileOf(key) { return (this.sys ? this.sys.files : []).find((f) => f.key === key) || { path: "", exists: false }; },
     fileLabel(f) {
       const t = this.t, fixed = { data: t.dataFolder, project: t.projectFolder, state: "state\\", settings: "stellwerk.yml",
-        releases: "releases.yaml", journal: "state\\journal.jsonl", opencode: "opencode.jsonc", readme: "README.md", backups: "backups\\",
-        monitoring: "monitoring.yml", workflow: "workflow.yml", insights: "insights.yml", history: "history\\" };
+        releases: "releases.yaml", journal: "state\\journal.jsonl", agentserver: "agentserver.jsonc", readme: "README.md", backups: "backups\\",
+        monitoring: "monitoring.yml", workflow: "workflow.yml", insights: "insights.yml", regression: "regression.yml", history: "history\\" };
       if (fixed[f.key]) { return fixed[f.key]; }
       const [kind, name] = f.key.split(":");
-      return kind === "playbook" ? "playbooks\\" + name + ".yaml" : ".opencode\\agents\\" + name + ".md";
+      return kind === "playbook" ? "playbooks\\" + name + ".yaml" : ".agentserver\\agents\\" + name + ".md";
     },
     agentRole(a) {
       const found = this.agentRoles.find((r) => r.name && r.name === a.name);

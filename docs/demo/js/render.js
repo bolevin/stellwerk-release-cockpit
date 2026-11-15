@@ -4785,13 +4785,13 @@ return function render(_ctx, _cache) {
                   k: "project",
                   open: helpOpen,
                   onToggle: toggleHelp
-                }, null, 8, ["open", "onToggle"])]), _createElementVNode("div", _hoisted_770, [(fileOf('opencode').exists)
+                }, null, 8, ["open", "onToggle"])]), _createElementVNode("div", _hoisted_770, [(fileOf('agentserver').exists)
                   ? (_openBlock(), _createElementBlock("button", {
                       key: 0,
                       class: "btn xs",
                       type: "button",
-                      onClick: $event => (selectFile('opencode'))
-                    }, _toDisplayString(t.edit) + " opencode.jsonc", 9, _hoisted_771))
+                      onClick: $event => (selectFile('agentserver'))
+                    }, _toDisplayString(t.edit) + " agentserver.jsonc", 9, _hoisted_771))
                   : _createCommentVNode("", true), (fileOf('readme').exists)
                   ? (_openBlock(), _createElementBlock("button", {
                       key: 1,
@@ -5521,7 +5521,7 @@ return function render(_ctx, _cache) {
                           _createElementVNode("i", null, ".", -1)
                         ]), 8, _hoisted_953))
                       : _createCommentVNode("", true),
-                    (llm.kind === 'opencode' && cfgHints)
+                    (llm.kind === 'agentserver' && cfgHints)
                       ? (_openBlock(), _createElementBlock("button", {
                           key: 1,
                           type: "button",
