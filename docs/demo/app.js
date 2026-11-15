@@ -435,9 +435,9 @@ Vue.createApp(useRender("root", {
         let level = "ok", text;
         if (!row || !row.checked) { level = "off"; text = t.rdNotChecked; }
         else if (row.reach === false) { level = "warn"; text = fill(t.rdNoLink, row.detail); }
-        else if (row.ok === false) { level = "bad"; text = "CheckServlet NOK"; }
+        else if (row.ok === false) { level = "bad"; text = "VersionCheck NOK"; }
         else if (row.match === false) { level = "warn"; text = row.head && row.detail ? row.detail : fill(t.rdRuns, row.version) + " ≠ " + row.expected; }
-        else { text = "CheckServlet OK · " + (row.version || "?"); }
+        else { text = "VersionCheck OK · " + (row.version || "?"); }
         if (alerts.length) {
           level = level === "bad" || alerts.some((a) => a.level === "critical") ? "bad" : "warn";
           text += " · " + alerts.map((a) => a.title.replace(stage + ": ", "")).join(" · ");
@@ -469,9 +469,9 @@ Vue.createApp(useRender("root", {
       const b = this.mon && this.mon.data && this.mon.data.board;
       if (!b) { return null; }
       return { map: { columns: [], rows: [], ...b.map }, perf: { envs: [], window: [], limits: {}, ...b.perf },
-        inte: { tests: [], rows: [], ...b.inte }, errors: { stages: [], rows: [], counts: {}, new: {}, links: {}, ...b.errors } };
+        uat: { tests: [], rows: [], ...b.uat }, errors: { stages: [], rows: [], counts: {}, new: {}, links: {}, ...b.errors } };
     },
-    monInteView() { return this.monInte || (this.monBoard && this.monBoard.inte) || null; },
+    monInteView() { return this.monInte || (this.monBoard && this.monBoard.uat) || null; },
     monRef() { const r = this.monInteView && this.monInteView.ref; return r && r.kind === "test" ? r.date : "usual"; },
     monLamps() {
       const b = this.monBoard;
@@ -480,8 +480,8 @@ Vue.createApp(useRender("root", {
       return {
         map: b.map.status !== "ok" ? (b.map.status === "bad" ? "r" : "off") : tiles.some((x) => x.state === "crit") ? "r" : tiles.some((x) => x.state === "warn") ? "y" : "g",
         perf: !envs.length ? "off" : envs.some((x) => x.status === "failed") ? "r" : envs.some((x) => x.status === "empty") ? "y" : "g",
-        inte: !i || !i.ref ? "off" : i.slower ? "y" : "g",
-        errors: e.status === "bad" ? "r" : e.status !== "ok" ? "off" : e.new.PROD || e.new.INTE ? "y" : "g",
+        uat: !i || !i.ref ? "off" : i.slower ? "y" : "g",
+        errors: e.status === "bad" ? "r" : e.status !== "ok" ? "off" : e.new.PROD || e.new.UAT ? "y" : "g",
       };
     },
 
@@ -1866,7 +1866,7 @@ Vue.createApp(useRender("root", {
       const run = this.monInteView && this.monInteView.run;
       this.monInteBusy = true;
       try {
-        const response = await fetch("/api/monitoring/inte?" + new URLSearchParams({ run: run ? run.date : "", ref }), { cache: "no-store" });
+        const response = await fetch("/api/monitoring/uat?" + new URLSearchParams({ run: run ? run.date : "", ref }), { cache: "no-store" });
         const data = await response.json();
         if (response.ok) { this.monInte = data; } else { this.monInteErr = data.error || String(response.status); }
       } catch (e) {
@@ -1876,7 +1876,7 @@ Vue.createApp(useRender("root", {
     },
     goMonitor(stage) {
       if (this.drawer) { this.closeDrawer(); }
-      if (!["map", "perf", "inte", "errors"].includes(stage) && !this.monOpen.includes(stage)) { this.monOpen.push(stage); }
+      if (!["map", "perf", "uat", "errors"].includes(stage) && !this.monOpen.includes(stage)) { this.monOpen.push(stage); }
       this.view = "monitoring";
       this.loadMonitoring();
       this.$nextTick(() => setTimeout(() => {

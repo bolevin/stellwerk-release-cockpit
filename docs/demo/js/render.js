@@ -1030,7 +1030,7 @@ const _hoisted_536 = {
 }
 const _hoisted_537 = {
   key: 0,
-  id: "mon-inte",
+  id: "mon-uat",
   class: "w mn-sec"
 }
 const _hoisted_538 = { class: "wh" }
@@ -2511,11 +2511,11 @@ return function render(_ctx, _cache) {
                 k: "stages",
                 open: helpOpen,
                 onToggle: toggleHelp
-              }, null, 8, ["open", "onToggle"])]), (side && side.checkservlet && side.checkservlet.status !== 'off')
+              }, null, 8, ["open", "onToggle"])]), (side && side.versioncheck && side.versioncheck.status !== 'off')
                 ? (_openBlock(), _createElementBlock("span", {
                     key: 0,
-                    class: _normalizeClass(["dot", { ok: 'g', bad: 'r', unreachable: 'y' }[side.checkservlet.status] || 'off']),
-                    title: 'CheckServlet ' + side.checkservlet.status + (side.checkservlet.detail ? ' · ' + side.checkservlet.detail : '')
+                    class: _normalizeClass(["dot", { ok: 'g', bad: 'r', unreachable: 'y' }[side.versioncheck.status] || 'off']),
+                    title: 'VersionCheck ' + side.versioncheck.status + (side.versioncheck.detail ? ' · ' + side.versioncheck.detail : '')
                   }, null, 10, _hoisted_59))
                 : _createCommentVNode("", true)]),
               (side && side.old)
@@ -2538,7 +2538,7 @@ return function render(_ctx, _cache) {
                             href: s.url,
                             target: "_blank",
                             rel: "noopener noreferrer",
-                            title: s.stage + ' · CheckServlet'
+                            title: s.stage + ' · VersionCheck'
                           }, _toDisplayString(s.group ? s.stage.slice(s.group.length + 1) : s.stage), 9, _hoisted_61))
                         : (_openBlock(), _createElementBlock("span", {
                             key: 1,
@@ -2577,7 +2577,7 @@ return function render(_ctx, _cache) {
                     ], 2))
                   }), 128))], 2))
                 : _createCommentVNode("", true),
-              (side && !(side.checkservlet && side.checkservlet.status !== 'off'))
+              (side && !(side.versioncheck && side.versioncheck.status !== 'off'))
                 ? (_openBlock(), _createElementBlock("p", _hoisted_68, _toDisplayString(t.csOff), 1))
                 : _createCommentVNode("", true)
             ]),
@@ -4008,10 +4008,10 @@ return function render(_ctx, _cache) {
                             (c.branch)
                               ? (_openBlock(), _createElementBlock("span", _hoisted_503, "DEV · " + _toDisplayString(c.branch), 1))
                               : _createCommentVNode("", true),
-                            _createElementVNode("span", _hoisted_504, [(c.checkservlet)
+                            _createElementVNode("span", _hoisted_504, [(c.versioncheck)
                               ? (_openBlock(), _createElementBlock("a", {
                                   key: 0,
-                                  href: c.checkservlet,
+                                  href: c.versioncheck,
                                   target: "_blank",
                                   rel: "noopener noreferrer"
                                 }, "CS ↗", 8, _hoisted_505))
@@ -4081,10 +4081,10 @@ return function render(_ctx, _cache) {
                               target: "_blank",
                               rel: "noopener noreferrer"
                             }, "Jenkins ↗", 8, _hoisted_526))
-                          : _createCommentVNode("", true), (e.checkservlet)
+                          : _createCommentVNode("", true), (e.versioncheck)
                           ? (_openBlock(), _createElementBlock("a", {
                               key: 2,
-                              href: e.checkservlet,
+                              href: e.versioncheck,
                               target: "_blank",
                               rel: "noopener noreferrer"
                             }, "CS ↗", 8, _hoisted_527))
@@ -4132,7 +4132,7 @@ return function render(_ctx, _cache) {
                   }), 128))])]),
                   monInteView
                     ? (_openBlock(), _createElementBlock("section", _hoisted_537, [
-                        _createElementVNode("div", _hoisted_538, [_createElementVNode("h2", null, [_createElementVNode("span", { class: _normalizeClass(["wl", monLamps.inte]) }, null, 2), _createTextVNode(_toDisplayString(t.mnInte), 1)]), _createElementVNode("span", _hoisted_539, _toDisplayString(monInteSource), 1)]),
+                        _createElementVNode("div", _hoisted_538, [_createElementVNode("h2", null, [_createElementVNode("span", { class: _normalizeClass(["wl", monLamps.uat]) }, null, 2), _createTextVNode(_toDisplayString(t.mnInte), 1)]), _createElementVNode("span", _hoisted_539, _toDisplayString(monInteSource), 1)]),
                         (monInteView.problem)
                           ? (_openBlock(), _createElementBlock("p", _hoisted_540, _toDisplayString(monInteView.problem), 1))
                           : _createCommentVNode("", true),

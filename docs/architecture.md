@@ -44,7 +44,7 @@ flowchart TB
     SW --> BB["Bitbucket: commits and changes of a release"]
     SW --> RP["ReportPortal: regression, smoke"]
     SW --> MON["Splunk and New Relic: errors and metrics"]
-    SW --> CS["CheckServlets: the version each stage runs"]
+    SW --> CS["Version checks: the version each stage runs"]
     SW <--> OC["Agent server: the agents"]
     OC --> LLM["Model provider"]
     OC --> RAG["release-rag: local context (RAG)"]

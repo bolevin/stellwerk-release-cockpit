@@ -22,7 +22,7 @@ Stellwerk puts all of it on one screen. The checklist of the release (the playbo
 
 ### The release line
 
-Releases travel along the stages like trains: DEV, the edge nodes, TEST, INTE, PROD. The gates G1 to G5 are the signals between them. Each train stands where its closed steps took it, and a red date under a station means that step is overdue. Next to it: the next milestone with a Go / No-Go box that already knows what speaks against it (open steps, new errors, blockers), and the checklist itself.
+Releases travel along the stages like trains: DEV, the edge nodes, TEST, UAT, PROD. The gates G1 to G5 are the signals between them. Each train stands where its closed steps took it, and a red date under a station means that step is overdue. Next to it: the next milestone with a Go / No-Go box that already knows what speaks against it (open steps, new errors, blockers), and the checklist itself.
 
 The left panel reads the stages every few minutes and compares the version each one runs with the version the plan expects there. Alerts come from plain rules first. A watch agent may add its own on top.
 
