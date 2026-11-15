@@ -2,13 +2,15 @@
 
 *Stellwerk* is German for the signal box of a railway: the room where one person sees every train on the line and sets the signals. I built it for release management.
 
+**[Open the live demo](https://bolevin.github.io/stellwerk-release-cockpit/)**: the real page of Stellwerk in your browser, in the made-up demo world of the screenshots. Click through the views, press *Why?* on a red tile or *Prepare the gate* on the Cockpit, ask AI Command what is left before PROD. Nothing is saved.
+
 ![The Cockpit: the morning briefing on top, the releases on the line, the next milestone and its Go / No-Go](docs/screenshots/cockpit.png)
 
 A big release is a long checklist spread over many tools. Jira has the tickets, Jenkins the builds, Confluence the release notes, ReportPortal the regression, Splunk and New Relic the evening after a deploy. The person who runs the release spends the morning opening tabs and asking "is this done?" in chats.
 
 Stellwerk puts all of it on one screen. The checklist of the release (the playbook) is the center: every step has its day, its owner and the proof that it is done. Around it, Stellwerk reads the systems and shows where they disagree with the plan. A small team of AI agents does the reading and the first analysis, and every answer comes with the evidence it is based on. The decisions stay with the people.
 
-> **About the screenshots.** They show a demo world: *Atlas Core*, a made-up parcel and freight platform with three releases in flight. Every outside system in them is a local stand-in with invented data, and the agents in the demo are scripted. The code of Stellwerk is private; this repository is its description.
+> **About the screenshots.** They show a demo world: *Atlas Core*, a made-up parcel and freight platform with three releases in flight. Every outside system in them is a local stand-in with invented data, and the agents in the demo are scripted. The server and the agents of Stellwerk are private. The live demo is the page of Stellwerk playing a recording of the demo world, so it answers what was recorded and changes nothing.
 
 ## What it does
 
