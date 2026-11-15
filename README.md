@@ -2,9 +2,15 @@
 
 *Stellwerk* is German for the signal box of a railway: the room where one person sees every train on the line and sets the signals. I built it for release management.
 
-**[Open the live demo](https://bolevin.github.io/stellwerk-release-cockpit/)**: the real page of Stellwerk in your browser, in the made-up demo world of the screenshots. Click through the views, press *Why?* on a red tile or *Prepare the gate* on the Cockpit, ask AI Command what is left before PROD. Nothing is saved.
+<div align="center">
 
-![The Cockpit: the morning briefing on top, the releases on the line, the next milestone and its Go / No-Go](docs/screenshots/cockpit.png)
+<a href="https://bolevin.github.io/stellwerk-release-cockpit/"><img src="docs/img/open-demo.svg" alt="Open the live demo" width="400"></a>
+
+The real page of Stellwerk in your browser, on made-up data. Nothing to install, nothing is saved.
+
+<a href="https://bolevin.github.io/stellwerk-release-cockpit/"><img src="docs/screenshots/cockpit.png" alt="The Cockpit: the morning briefing on top, the releases on the line, the next milestone and its Go / No-Go. A click opens the live demo."></a>
+
+</div>
 
 A big release is a long checklist spread over many tools. Jira has the tickets, Jenkins the builds, Confluence the release notes, ReportPortal the regression, Splunk and New Relic the evening after a deploy. The person who runs the release spends the morning opening tabs and asking "is this done?" in chats.
 
@@ -109,6 +115,14 @@ Python 3.11 (standard library HTTP server, no web framework), Vue 3 with templat
 ## How I built it
 
 I built Stellwerk in my own time, together with AI coding agents (Claude Code) as pair programmers. I set the direction, wrote the playbooks and the rules for how the agents may work, and reviewed every change; the coding agents wrote most of the code under those rules. Each version went through the full test suite, an architecture review along arc42 and a mutation check before it was released. Doing it this way taught me as much about leading AI agents as about release management.
+
+<div align="center">
+
+<a href="https://bolevin.github.io/stellwerk-release-cockpit/"><img src="docs/img/open-demo.svg" alt="Open the live demo" width="400"></a>
+
+See it for yourself: press *Why?* on a red tile or *Prepare the gate* on the Cockpit. The demo runs in your browser, on made-up data.
+
+</div>
 
 ## Status
 
