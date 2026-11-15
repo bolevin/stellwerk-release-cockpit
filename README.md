@@ -95,14 +95,14 @@ Stellwerk is my way of closing that gap. The cockpit reads the technical signals
 ```mermaid
 flowchart LR
     U["Release manager<br/>browser, voice"] <-->|"local API"| S["Stellwerk<br/>(one process on the PC)"]
-    S <-->|"read; write only by a button"| C["Company systems<br/>Jira, Jenkins, Confluence, Bitbucket,<br/>ReportPortal, Splunk, New Relic"]
+    S <-->|"read; write only by a button"| C["Release systems<br/>Jira, Jenkins, Confluence, Bitbucket,<br/>ReportPortal, Splunk, New Relic"]
     S -->|"questions"| A["Agent server<br/>11 narrow agents"]
     A -->|"MCP: read tools, proposals"| S
     A -->|"MCP: search"| R["release-rag<br/>local context, on the PC"]
-    A <-->|"prompts"| M["Model provider<br/>(GitHub Copilot)"]
+    A <-->|"prompts"| M["Model provider"]
 ```
 
-Stellwerk runs as a single process on the release manager's PC and serves the page locally. It reads the company systems with the user's personal keys and writes to them only on a button. The agents run on a local agent server and reach Stellwerk through MCP: 20 tools, of which 11 read what Stellwerk already knows (the checklists, the stages, the last readings), 6 read the systems directly for an investigation, and 3 make proposals that become buttons. The rules (alerts, suggestions, risks, the claim check) are plain code and run without any model.
+Stellwerk runs as a single process on the release manager's PC and serves the page locally. It reads the release systems with the rights of the person who runs it, so it never sees more than that person does, and it writes to them only on a button. The agents run on a local agent server and reach Stellwerk through MCP: 20 tools, of which 11 read what Stellwerk already knows (the checklists, the stages, the last readings), 6 read the systems directly for an investigation, and 3 make proposals that become buttons. The rules (alerts, suggestions, risks, the claim check) are plain code and run without any model.
 
 The agents also have a memory of their own. A small RAG project on the same PC indexes past releases, runbooks, the journal and the repositories, and the agents search it through MCP. So an agent can look up how a similar problem went in an earlier release before it answers. The index stays on the PC.
 
@@ -114,7 +114,7 @@ Python 3.11 (standard library HTTP server, no web framework), Vue 3 with templat
 
 ## How I built it
 
-I built Stellwerk in my own time, together with AI coding agents (Claude Code) as pair programmers. I set the direction, wrote the playbooks and the rules for how the agents may work, and reviewed every change; the coding agents wrote most of the code under those rules. Each version went through the full test suite, an architecture review along arc42 and a mutation check before it was released. Doing it this way taught me as much about leading AI agents as about release management.
+I built Stellwerk in my own time. I run AI coding agents (Claude Code) like a small development team: I set the direction, write the playbooks and the rules the agents have to follow, and review every change before it goes in. The agents write the code. Each version went through the full test suite, an architecture review along arc42 and a mutation check before it was released. Doing it this way taught me as much about leading AI agents as about release management.
 
 <div align="center">
 

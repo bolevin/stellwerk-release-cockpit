@@ -28,9 +28,9 @@ Stellwerk is a release cockpit for one release manager. It keeps the release che
 ## 2. Constraints
 
 - Runs on a Windows office PC as one process; the page is served locally and is reachable from this PC only.
-- Uses the personal access keys of the user for each company system; keys stay in the Windows credential store or the environment of the process.
-- Talks to the company systems only through their public REST APIs.
-- The agents run on a local agent server and use the models the company subscription allows.
+- Uses the personal access keys of the user for each system it reads; keys stay in the Windows credential store or the environment of the process.
+- Talks to the release systems only through their public REST APIs.
+- The agents run on a local agent server and use the models the organisation's subscription allows.
 - The page loads nothing from the internet and runs under a strict Content Security Policy.
 
 ## 3. Context and scope
@@ -143,7 +143,7 @@ flowchart LR
     B <--> S
     S <--> O
     O <--> R
-    S --> SYS["Company systems (HTTPS)"]
+    S --> SYS["Release systems (HTTPS)"]
     O --> MP["Model provider (HTTPS)"]
 ```
 
